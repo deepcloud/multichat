@@ -22,8 +22,7 @@ var debug = flags.get('debug');
 var ip = flags.get('ip');
 var port = flags.get('port');
 
-var clients = [ ];
-
+var clients = [];
 
 if (debug !== false) {
 	logger.setLevel('ERROR');
@@ -59,11 +58,10 @@ var wsServer = new webSocketServer({
 wsServer.on('request', function(request) {
 	logger.info('Connection from origin: ' + request.origin + '.');
 
-
 	var connection = request.accept(null, request.origin);
 	// we need to know client index to remove them on 'close' event
 
-var index = clients.push(connection) - 1;
+	var index = clients.push(connection) - 1;
 
 	logger.info('Connection accepted.');
 
