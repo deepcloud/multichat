@@ -1,6 +1,10 @@
 // Simple web server 
 
-var express = require('express');
+var path = require('path'),
+    fs = require('fs'),
+    sys = require('util'),
+    less = require('less'),
+    express = require('express');
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -28,6 +32,43 @@ app.get('/', function(req, res){
 		title: 'Home'
 	});
 });
+
+/* CSS Monitors */
+function toCSS(path, callback) {
+    var tree, css;
+    fs.readFile(path, 'utf-8', function (e, str) {
+        if (e) { return callback(e) }
+
+        new(less.Parser)({
+            paths: [require('path').dirname(path)],
+            optimization: 0
+        }).parse(str, function (err, tree) {
+            if (err) {
+                callback(err);
+            } else {
+                try {
+                    css = tree.toCSS();
+                    callback(null, css);
+                } catch (e) {
+                    callback(e);
+                }
+            }
+        });
+    });
+}
+
+var update_bootstrap = function(curr, prev){
+	if(curr && curr.mtime.getTime() == prev.mtime.getTime())
+		return;
+
+	console.info("Updating bootstrap css");
+	toCSS(__dirname + '/less/bootstrap.less', function (err, less) {
+	    var name = path.basename(__dirname + '/less/bootstrap.less', '.less');
+		fs.writeFile(path.join(__dirname + '/htdocs/css', name) + '.css', less, 'utf-8' );
+	});
+};
+fs.watchFile(__dirname + '/less/bootstrap.less', update_bootstrap);
+update_bootstrap();
 
 // Listen
 

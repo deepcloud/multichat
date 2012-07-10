@@ -1,5 +1,10 @@
 .DS_Store
 node_modules
-*.log
 .project
+
+### Log Files
 log/error_log
+*.log
+
+### Compiled Files
+bootstrap.css
