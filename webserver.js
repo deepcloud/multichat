@@ -70,6 +70,19 @@ var update_bootstrap = function(curr, prev){
 fs.watchFile(__dirname + '/less/bootstrap.less', update_bootstrap);
 update_bootstrap();
 
+var update_css = function(curr, prev){
+	if(curr && curr.mtime.getTime() == prev.mtime.getTime())
+		return;
+
+	console.info("Updating main css.css");
+	toCSS(__dirname + '/less/multichat.less', function (err, less) {
+	    var name = path.basename(__dirname + '/less/multichat.less', '.less');
+		fs.writeFile(path.join(__dirname + '/htdocs/css', 'css') + '.css', less, 'utf-8' );
+	});
+};
+fs.watchFile(__dirname + '/less/multichat.less', update_css);
+update_css();
+
 // Listen
 
 app.listen(3151);
