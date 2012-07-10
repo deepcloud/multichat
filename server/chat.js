@@ -83,7 +83,6 @@ var index = clients.push(connection) - 1;
 		}
 
 		if (errors.length > 0) {
-
 			//we have errors so don't login to the system
 			logger.error(errors);
 
@@ -128,6 +127,7 @@ var index = clients.push(connection) - 1;
 						connection.send(errorJSON);
 					}
 				} catch(e) {
+					//mail address can't be found in the database
 					errors.push('wrong-email');
 
 					var frontendData = {};
