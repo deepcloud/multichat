@@ -22,6 +22,9 @@ var debug = flags.get('debug');
 var ip = flags.get('ip');
 var port = flags.get('port');
 
+var clients = [ ];
+
+
 if (debug !== false) {
 	logger.setLevel('ERROR');
 } else {
@@ -56,11 +59,11 @@ var wsServer = new webSocketServer({
 wsServer.on('request', function(request) {
 	logger.info('Connection from origin: ' + request.origin + '.');
 
-	// accept connection - you should check 'request.origin' to make sure that
-	// client is connecting from your website
-	// (http://en.wikipedia.org/wiki/Same_origin_policy)
+
 	var connection = request.accept(null, request.origin);
 	// we need to know client index to remove them on 'close' event
+
+var index = clients.push(connection) - 1;
 
 	logger.info('Connection accepted.');
 
@@ -149,6 +152,7 @@ wsServer.on('request', function(request) {
 	// user disconnected
 	connection.on('close', function(connection) {
 		logger.info("Peer " + connection + " disconnected.");
+		clients.splice(index, 1);
 	});
 });
 
