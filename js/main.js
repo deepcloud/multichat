@@ -21,6 +21,10 @@ $(function() {
 		connection.onmessage = function(message) {
 			try {
 				var json = JSON.parse(message.data);
+				
+				if (json.type =='login-errors') {
+					alert(json.data);
+				}
 			} catch (e) {
 				console.log(message.data);
 				return;

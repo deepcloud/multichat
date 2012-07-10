@@ -78,15 +78,28 @@ wsServer.on('request', function(request) {
 		if (data.password == sha1('')) {
 			errors.push('empty-pass');
 		}
-		
+
 		if (errors.length > 0) {
+
 			//we have errors so don't login to the system
 			logger.error(errors);
-			var errorJSON = JSON.stringify(errors);
+
+			var data;
+			data.type = 'login-errors';
+			data.data = errors;
+
+			var errorJSON = JSON.stringify(data);
 			connection.send(errorJSON);
 		} else {
-			//make connection
-				
+			//make connection to the mysql database
+			var mysqlconnection = mysql.createConnection({
+				host : 'localhost',
+				user : 'root',
+				password : '',
+				database: 'chat',
+			});
+			
+			mysqlconnection.connect();
 		}
 
 		logger.warn(data);
