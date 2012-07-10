@@ -21,5 +21,15 @@ app.configure('development', function(){
 	app.use(error({ showMessage: true, dumpExceptions: true, showStack: true, logErrors: __dirname + '/log/error_log' }));
 });
 
+// Pages
+
+app.get('/', function(req, res){
+	res.render('index', {
+		title: 'Home'
+	});
+});
+
+// Listen
+
 app.listen(3151);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -1,0 +1,24 @@
+2012-07-10T19:30:51.161Z - Error Happened: 
+Error: Cannot find module 'jade'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:362:17)
+    at require (module.js:378:17)
+    at View.templateEngine (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view/view.js:134:38)
+    at Function.exports.compile (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view.js:68:17)
+    at ServerResponse.res._render (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view.js:417:18)
+    at ServerResponse.res.render (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view.js:318:17)
+    at /Users/mikevalstar/Sites/multichat/webserver.js:27:6
+    at callbacks (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/router/index.js:272:11)
+2012-07-10T19:31:57.818Z - Error Happened: 
+Error: Cannot find module 'jade'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:362:17)
+    at require (module.js:378:17)
+    at View.templateEngine (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view/view.js:134:38)
+    at Function.exports.compile (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view.js:68:17)
+    at ServerResponse.res._render (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view.js:417:18)
+    at ServerResponse.res.render (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/view.js:318:17)
+    at /Users/mikevalstar/Sites/multichat/webserver.js:27:6
+    at callbacks (/Users/mikevalstar/Sites/multichat/node_modules/express/lib/router/index.js:272:11)
