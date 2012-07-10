@@ -1,0 +1,50 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files (x86)\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'git://github.com/felixge/node-mysql.git' ]
+2 info using npm@1.1.36
+3 info using node@v0.8.2
+4 verbose node symlink C:\Program Files (x86)\nodejs\\node.exe
+5 verbose config file C:\Users\Dennis Meinen\.npmrc
+6 verbose config file C:\Program Files (x86)\nodejs\etc\npmrc
+7 verbose config file C:\Program Files (x86)\nodejs\node_modules\npm\npmrc
+8 verbose read json C:\xampp\htdocs\server\package.json
+9 verbose read json C:\xampp\htdocs\server\node_modules\flags\package.json
+10 verbose read json C:\xampp\htdocs\server\node_modules\log4js\package.json
+11 verbose read json C:\xampp\htdocs\server\node_modules\mysql\package.json
+12 verbose read json C:\xampp\htdocs\server\node_modules\node-irc\package.json
+13 verbose read json C:\xampp\htdocs\server\node_modules\websocket\package.json
+14 verbose read json C:\xampp\htdocs\server\package.json
+15 verbose cache add [ 'git://github.com/felixge/node-mysql.git', null ]
+16 silly cache add name=undefined spec="git://github.com/felixge/node-mysql.git" args=["git://github.com/felixge/node-mysql.git",null]
+17 verbose parsed url { protocol: 'git:',
+17 verbose parsed url   slashes: true,
+17 verbose parsed url   host: 'github.com',
+17 verbose parsed url   hostname: 'github.com',
+17 verbose parsed url   href: 'git://github.com/felixge/node-mysql.git',
+17 verbose parsed url   pathname: '/felixge/node-mysql.git',
+17 verbose parsed url   path: '/felixge/node-mysql.git' }
+18 silly lockFile 80878665-ithub-com-felixge-node-mysql-git git://github.com/felixge/node-mysql.git
+19 verbose lock git://github.com/felixge/node-mysql.git C:\Users\Dennis Meinen\AppData\Roaming\npm-cache\80878665-ithub-com-felixge-node-mysql-git.lock
+20 verbose addRemoteGit [ 'git://github.com/felixge/node-mysql.git', 'master' ]
+21 silly exec git "clone" "git://github.com/felixge/node-mysql.git" "C:\\Users\\DENNIS~1\\AppData\\Local\\Temp\\npm-4692\\1341933319476-0.6245710724033415"
+22 silly git,clone,git://github.com/felixge/node-mysql.git,C:\Users\DENNIS~1\AppData\Local\Temp\npm-4692\1341933319476-0.6245710724033415, spawning
+23 error git clone git://github.com/felixge/node-mysql.git CreateProcessW: The system cannot find the file specified.
+24 silly lockFile 80878665-ithub-com-felixge-node-mysql-git git://github.com/felixge/node-mysql.git
+25 error Error: `git "clone" "git://github.com/felixge/node-mysql.git" "C:\\Users\\DENNIS~1\\AppData\\Local\\Temp\\npm-4692\\1341933319476-0.6245710724033415"` failed with 127
+25 error     at ChildProcess.<anonymous> (C:\Program Files (x86)\nodejs\node_modules\npm\lib\utils\exec.js:56:20)
+25 error     at ChildProcess.EventEmitter.emit (events.js:91:17)
+25 error     at Process._handle.onexit (child_process.js:674:10)
+25 error  [Error: `git "clone" "git://github.com/felixge/node-mysql.git" "C:\\Users\\DENNIS~1\\AppData\\Local\\Temp\\npm-4692\\1341933319476-0.6245710724033415"` failed with 127]
+26 error You may report this log at:
+26 error     <http://github.com/isaacs/npm/issues>
+26 error or email it to:
+26 error     <npm-@googlegroups.com>
+27 error System Windows_NT 6.1.7601
+28 error command "C:\\Program Files (x86)\\nodejs\\\\node.exe" "C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "git://github.com/felixge/node-mysql.git"
+29 error cwd C:\xampp\htdocs\server
+30 error node -v v0.8.2
+31 error npm -v 1.1.36
+32 error message `git "clone" "git://github.com/felixge/node-mysql.git" "C:\\Users\\DENNIS~1\\AppData\\Local\\Temp\\npm-4692\\1341933319476-0.6245710724033415"` failed with 127
+33 verbose exit [ 1, true ]
