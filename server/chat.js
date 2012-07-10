@@ -84,22 +84,63 @@ wsServer.on('request', function(request) {
 			//we have errors so don't login to the system
 			logger.error(errors);
 
-			var data;
-			data.type = 'login-errors';
-			data.data = errors;
+			var frontendData = {};
+			frontendData.type = 'login-errors';
+			frontendData.data = errors;
 
-			var errorJSON = JSON.stringify(data);
+			var errorJSON = JSON.stringify(frontendData);
 			connection.send(errorJSON);
 		} else {
 			//make connection to the mysql database
-			var mysqlconnection = mysql.createConnection({
+			var mysqlconnection = mysql.createClient({
 				host : 'localhost',
 				user : 'root',
 				password : '',
-				database: 'chat',
+				database : 'chat'
 			});
-			
-			mysqlconnection.connect();
+
+			var query = 'SELECT * FROM `users` WHERE `email` = \'' + data.email + '\';'
+
+			mysqlconnection.query(query, function selectCallBack(err, results, fields) {
+				if (err) {
+					throw err;
+				}
+				try {
+					if (results[0].pass == data.password) {
+
+						var frontendData = {};
+						frontendData.type = 'login-succes';
+						frontendData.data = 'main';
+
+						var succesJSON = JSON.stringify(frontendData);
+						connection.send(succesJSON);
+					} else {
+						errors.push('wrong-pass');
+
+						var frontendData = {};
+						frontendData.type = 'login-errors';
+						frontendData.data = errors;
+
+						var errorJSON = JSON.stringify(frontendData);
+						connection.send(errorJSON);
+					}
+				} catch(e) {
+					errors.push('wrong-email');
+
+					var frontendData = {};
+					frontendData.type = 'login-errors';
+					frontendData.data = errors;
+
+					var errorJSON = JSON.stringify(frontendData);
+					connection.send(errorJSON);
+				}
+
+				console.log(results);
+			});
+
+			logger.info(query);
+			mysqlconnection.query(query);
+
 		}
 
 		logger.warn(data);
@@ -119,6 +160,7 @@ function sha1(input) {
 }
 
 function validateEmail(email) {
-	var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/;
+	//somehow this does validate email addresses like email@host.com' or '1' == '1
+	var re = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 	return re.test(email);
 }
